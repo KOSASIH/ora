@@ -51,15 +51,7 @@ export default function mountPaymentsEndpoints(router) {
       e.g. creating an order record, reserve an item if the quantity is limited, etc...
     */
 
-    // await orderCollection.insertOne({
-    //   pi_payment_id: paymentId,
-    //   product_id: currentPayment.data.metadata.productId,
-    //   user: 'sarintoxic',
-    //   txid: null,
-    //   paid: false,
-    //   cancelled: false,
-    //   created_at: new Date()
-    // });
+    
 
     // let Pi Servers know that you're ready
     await platformAPIClient.post(`/v2/payments/${paymentId}/approve`);
