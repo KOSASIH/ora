@@ -1,14 +1,24 @@
 # Ora on Pi
-Features:
-*Auth and sign up only with Pi Browser
-*Create, Edit, Delete post
-*Voting, Comment
-*Realtime Chat (Socket.io)
-*Donate author, tip post (only Pi)
-*...More
-<space><space>
-Install:
-*Clone project
-*Install dependencies with yarn (each folder client, server and socket)
-*Setup env variables
-*Start node server, socket and client.
+## **Features**
+
+- Authentication with Pi Browser
+- Donate, tip with Pi Account
+- Realtime Chat
+- Notifications
+- CRUD Post, Comment, Search
+- Follow and unfollow author, topics
+- Profile
+- more...
+
+## **Install **
+
+1. Clone Project
+2. Install Packages (each folder server, client and socket)
+3. Setup environment variables 
+4. Run Ora
+
+## **Video Demo **
+
+https://www.youtube.com/
+
+
