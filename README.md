@@ -10,14 +10,14 @@
 - Profile
 - more...
 
-## **Install **
+## Install
 
 1. Clone Project
 2. Install Packages (each folder server, client and socket)
 3. Setup environment variables 
 4. Run Ora
 
-## **Video Demo **
+## Video Demo 
 
 https://www.youtube.com/
 
