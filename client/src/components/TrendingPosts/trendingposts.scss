@@ -1,0 +1,14 @@
+@use "../../scss/"as *;
+.pom{
+    &__content{
+        margin-top: 30px;
+        padding: 15px;
+        // overflow: hidden;
+        // height: 360px;
+    }
+}
+.trending-img{
+    width: 281px;
+    height: 176px;
+    object-fit: cover;
+}

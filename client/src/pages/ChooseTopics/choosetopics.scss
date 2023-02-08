@@ -1,0 +1,54 @@
+@use "../../scss/"as *;
+.topics{      
+    height: 100vh;
+    &__container{
+        max-width: 1024px;
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    &__header{
+        &-top{
+            display: flex;
+            justify-content: space-between;
+                &-title { 
+                    font-size: 25px;
+                    font-weight: 700;
+                }
+                &-button{
+                    color: $white;
+                    background-color: $blue-2;
+                    width: 135px;
+                    height: 30px;
+                    text-align: center;
+                    border-radius: 20px;
+                }
+        }
+    }
+    &__content{
+        margin: 30px 100px 0;
+            &-container{
+                background-color: ghostwhite;
+                color: $black;
+                text-align: center;
+                box-shadow: 1px 1px 3px #cfcfcf;
+                border-radius: 10px;
+                width: 190px;
+                height: 100px;
+                cursor: pointer ;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover{
+                   box-shadow: 1px 1px 8px grey;
+                }
+                &.active{
+                    background-color: rgb(47, 181, 250);
+                    color: white;
+                }
+            }
+            &-text{
+                font-size: 14px;
+            }
+    }
+}

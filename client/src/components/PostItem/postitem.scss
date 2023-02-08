@@ -1,0 +1,23 @@
+@use "../../scss/"as *;
+.product-item {
+    margin-bottom: 30px;
+    display: flex;
+    &__img{
+        & img {
+            border-radius: 5px;
+            object-fit: cover;
+            width: 100%;
+            height: 140px;
+        }
+    }
+}
+.mb{
+    margin-bottom: 40px;
+}
+.post_saved{
+    cursor: pointer;
+    color: #969696;
+       i{
+         font-size:25px;  
+       }
+}

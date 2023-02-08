@@ -1,0 +1,9 @@
+@use "../../scss/"as *;
+.register{
+    width: 400px;
+    margin: 0 auto;
+    height: 100%;
+        &__container{
+           padding-top: 100px;
+        }
+}

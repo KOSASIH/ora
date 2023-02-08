@@ -1,0 +1,112 @@
+    @use "../../scss/"as *;
+    .suggest {
+       overflow: hidden;
+
+       &__main{
+           margin-top: 20px;
+       }
+        &__wrapper{
+            padding-top: 60px;
+        }
+        &__content {
+            margin-bottom: 30px;
+            &-right {
+                display: flex;
+                margin-top: 20px;
+            }
+            &-img {
+                & img {
+                    border-radius: 5px;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 140px;
+                }
+            }
+            &-img-left {                
+                & img{
+                    border-radius: 5px;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 280px;
+                    margin-bottom: 10px;
+                    
+                }
+            }
+            &-details {
+                padding: 0 10px;
+                &-heading{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;                   
+                }
+                &-save{
+                    cursor: pointer;
+                }
+                &-desc{                   
+                        &-text{
+                            color: $text-color-desc;
+                            margin: 10px 0;
+                            overflow: hidden;
+                            max-height: 3rem;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1; 
+                            -webkit-box-orient: vertical;
+                            font-weight: normal;
+                            font-size: 1rem;
+                        }
+                }
+                &-post {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    &-avt{
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 50%;
+                        background-color: $background-color;
+                        & img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    &-user{
+                        display: flex;
+                        align-items: center;
+                        gap : 0 10px;
+                    }
+                    &-icon {
+                        display: flex;
+                        gap: 0 20px;
+                        & div {
+                            cursor: pointer;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+.post-icon-suggest{
+    font-size:18px;
+    color:#969696;
+}
+.post-icon-suggest-text{
+    font-size:13px;
+    color:#969696;
+}
+.suggest-icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 5px;
+}
+.suggest__content-details-main{
+    & a {
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        word-break: break-word;
+    }
+}

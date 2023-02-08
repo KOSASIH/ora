@@ -1,0 +1,80 @@
+@use "../../scss/"as *;
+.search{
+    margin-top: 130px;
+        &__container{
+            max-width: 768px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+        &__heading {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            &-name{        
+                font-size: 30px;
+                text-align: center;
+                    & span{
+                        font-weight: 600;
+                        font-style: italic;
+                    }
+            }
+        }
+        &__content{
+            width: 100%;
+            max-width: 768px;
+            background-color: rgba(255,255,255,1);
+            box-shadow: 0 10px 15px -3px rgba(47,181,250,.05),0 4px 6px -2px rgba(47,181,250,.025);
+            border: 1px solid rgba(226,232,240,1);
+            border-radius: 5px;
+                &-result{
+                    margin-top: 30px;
+                }
+                &-body{
+                    padding: 1.875rem;
+                }
+                &-nav{
+                    &-menu{
+                        display: flex;
+                        align-items: center;
+                        border-bottom: 1px solid rgba(226,232,240,1);
+                        overflow: auto;
+                        justify-content: space-around;                      
+                    }
+                    &-item{
+                        flex-grow: 1;
+                        &-wrapper{                       
+                            height: 3.5rem;
+                            width: 100%;
+                            border-color: transparent;
+                            border-style: solid;
+                            border-width: 0.325em 0;
+                            white-space: nowrap;
+                                &.active{
+                                    border-bottom-color: rgba(47,181,250,1);
+                                    &:hover{
+                                        border-bottom-color: rgba(47,181,250,1);
+                                    }
+                                }
+                                &:hover{
+                                    border-bottom-color: rgba(226,232,240);
+                                }
+                        }
+                    }
+                    &-link{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        width: 100%;
+                        gap: 0 10px;
+                        font-weight: 700;
+                        font-size: 18px;
+                    }
+                }
+              
+        }
+}

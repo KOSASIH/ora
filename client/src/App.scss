@@ -1,0 +1,84 @@
+@use "./scss/" as *;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 100%;
+
+  @include tablet {
+    font-size: 80%;
+  }
+
+  @include mobile {
+    font-size: 100%;
+  }
+}
+body {
+  font-family:$font-no;
+  font-weight: 400;
+  line-height:1.5;
+
+  @include mobile {
+    margin-bottom: 3rem;
+    margin-left: 12px;
+    margin-right: 12px;
+header {
+  max-width: 100%;
+}
+body {
+  max-width: 100%;
+  
+}
+.post__details-content-container {
+  max-width: 100%;
+ 
+}
+.post__subscription {
+  max-width: 100%;
+}
+.modal__content {
+  max-width: 100%;
+}
+#slideBar {
+  display: none;
+}
+
+  }
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+button,
+input{
+  outline: 0;
+  border: none;
+}
+ul{
+  list-style-type: none;
+}
+img {
+  max-width: 100%;
+}
+.container {
+  max-width:1160px;
+  margin: auto;
+}
+.section {
+  padding: 0 2rem;
+}
+.main{
+  margin-top: 128px;
+}
+.mt-190{
+  margin-top: 190px;
+}

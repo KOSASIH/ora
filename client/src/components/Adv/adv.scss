@@ -1,0 +1,144 @@
+@use "../../scss/"as *;
+.adv {
+    margin-top: 50px;
+    padding-bottom: 50px;
+    &__donate{
+         padding: 30px;
+         border: 1px solid $boder-color;
+         &-link{
+             display: block;
+             width: 100%;
+             margin-top: 25px;
+         }
+         &-icon{ 
+             margin-right: 3px;
+         }
+         &-button { 
+             width: 100%;
+             text-align: center;
+             padding: 10px;
+             background-color: $blue;
+             color: $white;
+             font-size: 16px;
+             cursor: pointer;
+             &:hover{
+                background-color: #c955cf;
+             }
+ 
+         }
+    }
+    &__widget{
+        margin-top: 20px;
+         border: 1px solid $boder-color;
+         &-title{
+             font-size: 13px;
+             font-weight: 700;
+             border-bottom: 1px solid $boder-color ;
+             padding: 12px;
+             color: $text-menu-color;
+         }
+        &-content{
+         padding: 12px 50px 15px 15px;
+            &-details{
+                display: flex;
+                align-items: center;
+                gap: 0 10px;
+                margin: 15px 0;
+            }
+        }
+        &-avt{
+         width: 100%;
+         width: 48px;
+         height: 48px;
+            & a {
+                display: block;
+                width: 100%;
+                width: 48px;
+                height: 48px;
+            }
+             & img{
+                 width: 100%;
+                 height: 100%;
+                 object-fit: cover;
+                 border-radius: 50%;
+             }
+        }
+    }
+    &__contact{
+        margin-top: 20px;
+        padding: 20px;
+        padding-bottom: 50px;
+        border: 1px solid $boder-color ;
+         &-heading{
+             font-size: 15px;
+             font-weight: 700;
+             color:$text-color-desc;
+         }
+         &-social{
+             margin-top: 10px;
+             &-list{
+                 display: flex;
+                 flex-direction: column;
+                 gap: 20px 0;
+             }
+             &-link{
+                 display: flex;
+                 align-items: center;
+                 gap: 0 10px;
+             }
+             &-icon{
+                 font-size: 22px;
+                 &.fb{
+                     color: #3b5999;
+                 }
+                 &.yt{
+                     color: #cd201f;
+                 }
+                 &.sp{
+                     color: #50e084;
+                 }
+                 &.cart{
+                     color: #ff5700;
+                 }
+                 &.chat{
+                     color: #969696;
+                 }
+                 
+ 
+             }
+             &-text{
+                 font-size: 16px;
+                 color: $text-menu-color;
+             }
+         }
+    }
+    &__about{
+        margin-top: 20px;
+        &-list{
+            display: flex;
+            flex-direction: row;
+            gap: 0 20px;
+            padding-bottom: 10px;
+        }
+        &-item{
+            padding: 0;
+        }
+        &-item{
+            position: relative;
+            &:not(:last-child)::after {
+                content: " . ";
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                background-color: #333;
+                margin: 0 8px;
+                top:-2px;
+            }
+        }
+        &-text{
+            font-size: 13px;
+            color:$text-menu-color;
+            
+        }
+    }
+ }
