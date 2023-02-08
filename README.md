@@ -3,17 +3,17 @@
 
 - Authentication with Pi Browser
 - Donate, tip with Pi Account
+- CRUD Post, Comment, Search
 - Realtime Chat
 - Notifications
-- CRUD Post, Comment, Search
-- Follow and unfollow author, topics
+- Follow authors, topics
 - Profile
 - more...
 
 ## Install
 
 1. Clone Project
-2. Install Packages (each folder server, client and socket)
+2. Install Packages (in folder server, client and socket)
 3. Setup environment variables 
 4. Run Ora
 
