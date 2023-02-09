@@ -1,4 +1,4 @@
-# Ora on Pi
+# Ora on Pi Network 
 ## **Features**
 
 - Authentication with Pi Browser
