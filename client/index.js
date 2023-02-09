@@ -22,9 +22,6 @@ import mountUserEndpoints from './controllers/payments.js';
 dotenv.config()
 const app = express();
 const PORT = process.env.APP_PORT;
-const CLOUDNAME = process.env.CLOUDNAME;
-const CLOUDKEY = process.env.CLOUDKEY;
-const CLOUDSECRET = process.env.CLOUDSECRET;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Payments endpoint under /payments:
@@ -37,9 +34,9 @@ const userRouter = express.Router();
 mountUserEndpoints(userRouter);
 app.use('/userPi', userRouter);
 cloudinary.config({ 
-  cloud_name: CLOUDNAME, 
-  api_key: CLOUDKEY,
-  api_secret: CLOUDSECRET
+  cloud_name: 'sarintoxic', 
+  api_key: '738932943592546',
+  api_secret: 'Iu_h8lpgfwLbCyPt0au93hyBIz4'
 });
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

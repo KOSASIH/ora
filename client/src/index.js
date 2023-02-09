@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from './redux/reducers'
 import mySaga from './redux/sagas'
 import { CookiesProvider } from "react-cookie";
+import './lang/config/i18n'
 const sagaMiddleware = createSagaMiddleware()
 const store = legacy_createStore (reducers, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(mySaga)

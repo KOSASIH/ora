@@ -5,7 +5,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./usersettings.scss";
 import { userState$, passwordState$ } from "../../redux/selectors";
+import { useTranslation } from "react-i18next";
+
 const UserSettings = () => {
+  const { t, i18n } = useTranslation();
+// const changeLanguageHandler = (e) => {
+//   const languageValue = e.target.value
+//   i18n.changeLanguage(languageValue);
+// }
   const dispatch = useDispatch();
   const toast = useRef(null);
   const currentUser = useSelector(userState$);
@@ -261,7 +268,7 @@ const UserSettings = () => {
     return () => clearTimeout(timer);
   }, [isErr, isSuccess, isErrEmail,isSuccessEmail]);
   useEffect(() => {
-    document.title = `Cài đặt người dùng`
+    document.title = `${t('user_setting')}`
  }, [currentUser]);
   return (
     <div className="container">
@@ -431,7 +438,7 @@ const UserSettings = () => {
                       </div>
                       <div className="settings__flex">
                         <div className="settings__flex-item">
-                          <label className="settings__name">DISPLAY NAME</label>
+                          <label className="settings__name">{t('DISPLAY_NAME')}</label>
                           <input
                             type="text"
                             className="settings__input"
@@ -638,7 +645,7 @@ const UserSettings = () => {
                         </form>
                       </div>
                       <div className="settings__flex">
-                        <div className="settings__flex-item">
+                        {/* <div className="settings__flex-item">
                           <label htmlFor="" className="settings__name">
                             ID
                           </label>
@@ -653,7 +660,11 @@ const UserSettings = () => {
                               })
                             }
                           />
-                        </div>
+                        </div> */}
+                         {/* <select className="custom-select" style={{width: 200}} onChange={changeLanguageHandler}>
+        <option value="en" >English</option>
+        <option value="vi" >Tiếng Việt</option>
+      </select> */}
                         <div className="settings__flex-item">
                           <label htmlFor="" className="settings__name">
                            Adress

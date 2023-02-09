@@ -50,7 +50,22 @@ body {
 #slideBar {
   display: none;
 }
-
+.user__profile-tabs {
+  display: none;
+}
+.user__profile-widget-body {
+  width: 100%;
+}
+.user__profile-content {
+  display: block;
+}
+.user__profile-sidebar {
+  width: 100%;
+}
+.user__profile-main {
+  display: flex;
+  width: 100%;
+}
   }
 }
 a {

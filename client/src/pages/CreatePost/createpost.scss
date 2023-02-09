@@ -13,8 +13,11 @@
     }
 
     &__title {
+       
+        border-radius: 5px 10px;
+        border: solid slateblue;
         margin-bottom: 20px;
-        font-size: 30px;
+        font-size: 25px;
         font-family: $font-mon;
         line-height: 3rem;
         font-weight: 600;
@@ -30,7 +33,11 @@
     }
 
     &__content {
+     
+        // border-right: 4px solid slateblue;
+        // border-top: 2px solid slateblue;;
         font-size: 18px;
+        height: 50%;
         z-index: 2;
 
         &:empty::before {

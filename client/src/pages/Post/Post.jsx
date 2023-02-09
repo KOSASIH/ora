@@ -8,6 +8,7 @@ import { userState$, postState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import Comment from "../../components/Comment/Comment";
 import { FacebookIcon, FacebookShareButton } from 'react-share';
+import {donatePi} from '../../components/pisdk/pisdk.tsx'
 const Post = () => {
   const navigate = useNavigate();
   const socket = useRef();
@@ -76,6 +77,23 @@ const Post = () => {
     },
     [dataPost._id, isVote]
   );
+  const tip = useCallback( async (e) => {
+    e.preventDefault();
+    donatePi("Tip Post", 1, {To: "Piora"})
+  
+    // const option  ={
+    //   method: "post", 
+    //   url:``,
+    //   data: ''
+    // }
+    
+
+  //   const response = await axios(option)
+  //   setMessages(response.data.data)
+  //  if (response.data.status=='OK') setVisible(!visible)
+  //   setErr(false)
+  },[])
+
   const handleUnVote = useCallback(
     async (e) => {
       e.preventDefault();
@@ -443,6 +461,8 @@ const Post = () => {
               </div>
             </div>
             <div className="view-count">{dataPost.views} views</div>
+            <div className="tip-post" onClick={tip}><i className="bx bx-donate-heart  adv__donate-icon"></i></div>
+
           </div>
           <div className="pull-right">
             <div className="right-tools">

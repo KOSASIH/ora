@@ -1,6 +1,6 @@
 @use "../../scss/"as *;
 .settings {
-    margin: 0 215px 30px 60px;
+    margin: 0 0px 30px 0px;
     &__cover{
         height: 170px;
         margin-bottom: 20px;
@@ -200,6 +200,7 @@
            }
     }
     &__flex-top{
+       
         display: flex;
         gap: 0 30px;
         margin-bottom: 20px;

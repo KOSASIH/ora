@@ -6,6 +6,7 @@ import axios from "axios";
 import * as actions from "../../redux/actions";
 import "./header.scss";
 import Notifications from "../../components/Notifications/Notifications";
+import { useTranslation } from "react-i18next";
 const Header = () => {
   const listRef = useRef();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,6 +28,7 @@ const Header = () => {
   const [notifications, setNotifications] = useState([]);
   const location = useLocation();
   const path = location.pathname.split("/")[3];
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     if (listRef.current) {
       const slider = listRef.current;
@@ -497,7 +499,7 @@ const Header = () => {
                       </li>
                       <li>
                         <Link to="post/create/">
-                          <button className="header__button">New Post</button>
+                          <button className="header__button">{t('new_post')}</button>
                         </Link>
                       </li>
                     </ul>

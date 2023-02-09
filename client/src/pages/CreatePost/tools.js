@@ -17,7 +17,7 @@ import axios from 'axios';
 const Config = () => {
   return ({
     holder: "editorjs",
-    placeholder:"Content",
+    placeholder:"_Your content here_",
     tools: {
       embed: Embed,
       table: Table,

@@ -156,7 +156,7 @@ const Comment = ({ comment, postId }) => {
         ""
       )}
       <div className="comments-reply">
-        {replies?.map((reply) => (
+        {replies?.reverse().map((reply) => (
             <Reply reply={reply} visible={handelVisible} key={reply._id}/>
         ))}
       </div>

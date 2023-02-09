@@ -106,12 +106,13 @@ useEffect(() => {
 }, []);
    return (
     <div className="mt-80">
+      
       <div className="post">
         <form action="" method="POST" onSubmit={onSubmit}>
           <div className="post__container">
               <div
                 suppressContentEditableWarning
-                placeholder="YOUR TITLE HERE"
+                placeholder="_YOUR TITLE HERE_"
                 className="post__title"
                 ref={refEdit}
                 value={data.title}
@@ -121,9 +122,12 @@ useEffect(() => {
                 <div id="editorjs"/>
               </div>
               <div className="post__button">
-                <button className="post__button-main border save">
-                  Draft
+              <Link to="/">
+              <button className="post__button-main border save">
+                  Back
                 </button>
+             </Link>
+                
                 <button
                   className="post__button-main border next"
                   onClick={handleVisibleModal}

@@ -183,15 +183,12 @@ const Messages = () => {
                   </li>
                 ))
               : ""}
-          </ul>
-        </div>
-        <div className="mes__box">
-          {currentChat ? (
+                {currentChat ? (
             <>
             <MessageHeader  receiverId={currentChat?.members.filter((member) =>  member !== userState.currentUser?._id)}/>
               <div className="mes__box-content">
                 <div className="mes__box-time">
-                  <p>May 8, 2022</p>
+                  <p>May 8, 2023</p>
               </div>
                 <div className="mes__box-chat">
                   <div className="mes__box-chat-buble">
@@ -240,7 +237,9 @@ const Messages = () => {
           ) : (
             <p className="picked-mes">Chọn một cuộc trò chuyện để bắt đầu!</p>
           )}
+          </ul>
         </div>
+      
       </div>
     </div>
   );
