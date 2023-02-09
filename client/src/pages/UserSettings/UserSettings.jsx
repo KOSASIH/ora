@@ -650,11 +650,12 @@ const UserSettings = () => {
                             Language
                           </label>
                           <select
+                           value={dataUser.adress}
                            className="settings__input"
                            onChange={(e) =>
                             setDataUser({
                               ...dataUser,
-                              identification: e.target.value, } ) }
+                              adress: e.target.value, } ) }
                            >
         <option value="en">English</option>
         <option value="vi">Tiếng Việt</option>
@@ -670,7 +671,7 @@ const UserSettings = () => {
                            disabled="true"
                             type="text"
                             className="settings__input"
-                            value="piora"
+                            value={dataUser.identification}
                             // onChange={(e) =>
                             //   setDataUser({
                             //     ...dataUser,
