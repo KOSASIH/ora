@@ -349,3 +349,15 @@ input[type=number]::-webkit-outer-spin-button {
 color: purple;
 margin-top: 20px;
 }
+.withdraw {
+   margin-top: 33px;
+    
+    gap: 0 10px;
+    font-size: 16px;
+    color: $white;
+    padding: 10px;
+    background-color: rgb(193, 66, 225);
+    opacity: 1;
+    cursor:pointer;    
+    border-radius: 5px;
+}

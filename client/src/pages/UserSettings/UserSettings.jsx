@@ -581,7 +581,7 @@ const UserSettings = () => {
                               className={`settings__input ${
                                 error.oldPassword ? "wrong" : ""
                               }`}
-                              placeholder="****************************************"
+                              placeholder=""
                               value={dataPassword.oldPassword}
                               onChange={onInputChange}
                               onBlur={validateInput}
@@ -602,7 +602,7 @@ const UserSettings = () => {
                               className={`settings__input ${
                                 error.password ? "wrong" : ""
                               }`}
-                              placeholder="****************************************"
+                              placeholder=""
                               value={dataPassword.password}
                               onChange={onInputChange}
                               onBlur={validateInput}
@@ -621,7 +621,7 @@ const UserSettings = () => {
                               className={`settings__input ${
                                 error.confirmPassword ? "wrong" : ""
                               }`}
-                              placeholder="****************************************"
+                              placeholder=""
                               value={dataPassword.confirmPassword}
                               onChange={onInputChange}
                               onBlur={validateInput}
@@ -645,58 +645,62 @@ const UserSettings = () => {
                         </form>
                       </div>
                       <div className="settings__flex">
-                        {/* <div className="settings__flex-item">
-                          <label htmlFor="" className="settings__name">
-                            ID
-                          </label>
-                          <input
-                            type="number"
-                            className="settings__input"
-                            value={dataUser.identification}
-                            onChange={(e) =>
-                              setDataUser({
-                                ...dataUser,
-                                identification: e.target.value,
-                              })
-                            }
-                          />
-                        </div> */}
-                         {/* <select className="custom-select" style={{width: 200}} onChange={changeLanguageHandler}>
-        <option value="en" >English</option>
-        <option value="vi" >Tiếng Việt</option>
-      </select> */}
                         <div className="settings__flex-item">
                           <label htmlFor="" className="settings__name">
-                           Adress
+                            Language
+                          </label>
+                          <select
+                           className="settings__input"
+                           onChange={(e) =>
+                            setDataUser({
+                              ...dataUser,
+                              identification: e.target.value, } ) }
+                           >
+        <option value="en">English</option>
+        <option value="vi">Tiếng Việt</option>
+      </select>
+                        
+                        </div>
+                    
+                        <div className="settings__flex-item">
+                          <label htmlFor="" className="settings__name">
+                           Invited by
                           </label>
                           <input
+                           disabled="true"
                             type="text"
                             className="settings__input"
-                            value={dataUser.address}
-                            onChange={(e) =>
-                              setDataUser({
-                                ...dataUser,
-                                address: e.target.value,
-                              })
-                            }
+                            value="piora"
+                            // onChange={(e) =>
+                            //   setDataUser({
+                            //     ...dataUser,
+                            //     address: e.target.value,
+                            //   })
+                            // }
                           />
                         </div>
                         <div className="settings__flex-item">
                           <label htmlFor="" className="settings__name">
-                            Phone Number
+                            Balance
                           </label>
                           <input
+                          disabled="true"
                             type="number"
                             className="settings__input"
                             value={dataUser.mobile}
-                            onChange={(e) =>
-                              setDataUser({
-                                ...dataUser,
-                                mobile: e.target.value,
-                              })
-                            }
+                         
                           />
+                        
                         </div>
+                        <div className="settings__flex-item">
+                        <button
+                       
+                       className="withdraw"
+                       // onClick={withDraw}
+                     >
+                      Withdraw
+                     </button>
+                     </div>
                       </div>
                     </div>
                     <div className="settings__actions">

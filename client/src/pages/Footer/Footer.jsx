@@ -21,17 +21,13 @@ const Footer = () => {
           <div className="footer__about-menu">
             <ul className="footer__about-list">
               <li className="footer__about-item">
-                <Link to="/">
-                  <span className="footer__about-text">ABOUT PIORA</span>
+                <Link to="/post/terms-of-use">
+                  <span className="footer__about-text">TERMS OF USE</span>
                 </Link>
               </li>
+             
               <li className="footer__about-item">
-                <Link to="/">
-                  <span className="footer__about-text">CATERORY</span>
-                </Link>
-              </li>
-              <li className="footer__about-item">
-                <Link to="/">
+                <Link to="/post/privacy-policy">
                   <span className="footer__about-text">POLICY</span>
                 </Link>
               </li>

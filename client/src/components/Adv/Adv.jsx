@@ -102,12 +102,12 @@ const Adv = () => {
         <div className="adv__about">
             <ul className="adv__about-list">
                 <li className="adv__about-item">
-                    <Link to="/" className="adv__about-link"> 
-                        <span className="adv__about-text">About Piora</span>
+                    <Link to="/post/terms-of-use" className="adv__about-link"> 
+                        <span className="adv__about-text">Terms of use</span>
                     </Link>
                 </li>
                 <li className="adv__about-item">
-                    <Link to="/" className="adv__about-link"> 
+                    <Link to="/post/privacy-policy" className="adv__about-link"> 
                         <span className="adv__about-text">Policy</span>
                     </Link>
                 </li>
@@ -117,7 +117,7 @@ const Adv = () => {
                     </Link>
                 </li>
             </ul>
-            <span className="adv__about-text">© 2023 Piora Lab.</span>
+            <span className="adv__about-text">© 2023 Ora Lab.</span>
         </div>
       </div>
   );

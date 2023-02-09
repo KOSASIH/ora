@@ -102,14 +102,14 @@ const Register = () => {
               value={data.password}
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
-            {/* <input
+            <input
               type="text"
-              placeholder="Số điện thoại"
+              placeholder="Invite code"
               name="mobile"
               className="login__form-input"
-              value={data.mobile}
-              onChange={(e) => setData({ ...data, mobile: e.target.value })}
-            /> */}
+              value={data.adress}
+              onChange={(e) => setData({ ...data, adress: e.target.value })}
+            />
             {/* <input
               type="text"
               placeholder="Số chứng minh thư"
