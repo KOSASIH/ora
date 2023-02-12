@@ -1,11 +1,11 @@
-@use "../../scss/"as *;
-.mes{
-    height:95vh;
-        ::-webkit-scrollbar {
-            display: none;
-        }
+@use "../../scss/" as *;
+.mes {
+    height: 95vh;
+    ::-webkit-scrollbar {
+        display: none;
     }
-.mes__header{
+}
+.mes__header {
     height: 68px;
     display: flex;
     align-items: center;
@@ -14,36 +14,36 @@
     border-bottom: 1px solid #e3ebf6;
     box-sizing: border-box;
 }
-.mes__header-logo-img{
+.mes__header-logo-img {
     height: 2rem;
     object-fit: contain;
     object-position: left;
     max-width: 100%;
     display: block;
 }
-.mes__main{
+.mes__main {
     // height: calc(100% - 200px);
     display: flex;
     position: relative;
 }
-.mes__sidebar{
+.mes__sidebar {
     width: 100%;
     height: 100%;
     position: relative;
     margin-left: 0;
     border-right: 1px solid #e3ebf6;
     box-sizing: border-box;
-    transition: margin-left .2s ease-out;
+    transition: margin-left 0.2s ease-out;
     z-index: 99;
     background: #fff;
 }
-.mes__box{
+.mes__box {
     width: calc(100% - 350px);
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.mes__search{
+.mes__search {
     z-index: 100;
     border-bottom: 1px solid #e3ebf6;
     box-sizing: border-box;
@@ -51,17 +51,16 @@
     display: flex;
     position: relative;
 }
-.mes__search-input{
+.mes__search-input {
     width: 100%;
     padding: 0.75rem;
     font-size: 16px;
 }
-.mes__chatlist{
+.mes__chatlist {
     height: calc(100% - 68px);
     overflow-y: auto;
-
 }
-.mes__chatitem{
+.mes__chatitem {
     transition: none;
     height: 100px;
     cursor: pointer;
@@ -73,62 +72,61 @@
     border-bottom: 1px solid #e3ebf6;
     box-sizing: border-box;
     color: #333;
-        &.active{
-            background: rgba(51,152,212,1);
-            color:$white;
-        }
+    &.active {
+        background: rgba(51, 152, 212, 1);
+        color: $white;
+    }
 }
-.mes__chatavt{
+.mes__chatavt {
     height: 56px;
     width: 56px;
     margin: 0 auto;
     border-radius: 9999px;
     cursor: pointer;
-        & img{
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            display: block;
-            object-fit: cover;
-        }
+    & img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        display: block;
+        object-fit: cover;
+    }
 }
-.mes__time{
+.mes__time {
     position: absolute;
     font-size: 13px;
     top: 1rem;
     right: 1rem;
-    color: #fff;   
-        
+    color: #fff;
 }
-.mes__content{
+.mes__content {
     width: calc(100% - 40px - 3rem);
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-right: 1rem;
     height: 100%;
 }
-.mes__title{
+.mes__title {
     font-size: medium;
     font-weight: 700;
 }
-.mes__preview{
+.mes__preview {
     position: relative;
     height: 3em;
     color: #333;
-    display:flex;
+    display: flex;
     align-items: center;
-    justify-content:space-between;
-        &::after{
-            content: "";
-            text-align: right;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 70%;
-            height: 1.2em;
-        }
+    justify-content: space-between;
+    &::after {
+        content: "";
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 70%;
+        height: 1.2em;
+    }
 }
-.mes__box-header{
+.mes__box-header {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -138,16 +136,16 @@
     border-bottom: 1px solid #e3ebf6;
     box-sizing: border-box;
     background: #fff;
-    background: linear-gradient(90deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.8) 30%,#fff);
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.8) 30%, #fff);
     height: 68px;
     flex: 0 0 68px;
     width: 100%;
 }
-.mes__box-username{
+.mes__box-username {
     font-weight: 700;
     font-size: medium;
 }
-.mes__box-content{
+.mes__box-content {
     flex-grow: 1;
     width: 100%;
     overflow-y: auto;
@@ -156,39 +154,39 @@
     padding-bottom: 1rem;
     height: calc(100% - 72px - 70px);
     opacity: 1;
-    transition: opacity .1s ease-in
+    transition: opacity 0.1s ease-in;
 }
-.mes__box-time{
+.mes__box-time {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
     margin-top: 1rem;
-        & p{
-            width: fit-content;
-            padding: 5px 10px;
-            background-color: rgba(0,0,0,.3);
-            color: #fff;
-            border: 0 solid;
-            border-radius: 14px;
-        }
+    & p {
+        width: fit-content;
+        padding: 5px 10px;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        border: 0 solid;
+        border-radius: 14px;
+    }
 }
-.mes__box-input{
+.mes__box-input {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
     position: relative;
 }
-.mes__box-input-container{
+.mes__box-input-container {
     width: 100%;
     display: flex;
     align-items: center;
 }
-.mes__box-input-text{
+.mes__box-input-text {
     flex-grow: 1;
     height: 100%;
     padding: 1rem;
-    border: 1px solid rgba(237,242,247,1);
+    border: 1px solid rgba(237, 242, 247, 1);
     border-radius: 0.75rem;
     resize: none;
     min-height: 72px;
@@ -197,7 +195,7 @@
     display: block;
     font-size: 16px;
 }
-.send{
+.send {
     display: flex;
     cursor: pointer;
     margin-left: 1.5rem;
@@ -207,30 +205,30 @@
     border-width: 1px;
     border-radius: 9999px;
     color: #fff;
-    color: rgba(255,255,255,1);
-    background: rgba(51,152,212,1);
+    color: rgba(255, 255, 255, 1);
+    background: rgba(51, 152, 212, 1);
     height: 40px;
     width: 40px;
     flex: 0 0 40px;
-        & i {
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            line-height: 1;
-        }
+    & i {
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+    }
 }
-.chat-buble{
+.chat-buble {
     display: flex;
     padding: 0.325rem 1rem;
     max-width: 80%;
     width: fit-content;
-        &.right{
-            margin-left: auto;
-        }
+    &.right {
+        margin-left: auto;
+    }
 }
-.content{
+.content {
     max-width: 564px;
     overflow-x: hidden;
     width: 100%;
@@ -241,82 +239,81 @@
     overflow-wrap: break-word;
     position: relative;
     border-radius: 18px;
-        &.right{
-            background-color: rgba(51,152,212,1);
-            color: rgba(255,255,255,1);
-        }
-        &.left{
-            background-color:#f0f2f5;
-            color: #050505;
-        }
+    &.right {
+        background-color: rgba(51, 152, 212, 1);
+        color: rgba(255, 255, 255, 1);
+    }
+    &.left {
+        background-color: #f0f2f5;
+        color: #050505;
+    }
 }
-.inner-content{
-    font-size: .9375rem;
+.inner-content {
+    font-size: 0.9375rem;
     white-space: pre-wrap;
     line-height: 20px;
 }
-.chat-avatar-container{
+.chat-avatar-container {
     width: 2.5rem;
     height: 2.5rem;
     margin-left: -0.25rem;
 }
-.chat-avatar{
+.chat-avatar {
     width: 2.5rem;
     height: 2.5rem;
     display: block;
     flex-shrink: 0;
     border-radius: 50%;
-        & img{
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: inherit;
-        }
+    & img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+    }
 }
-.mestime{
+.mestime {
     float: right;
     display: block;
     right: 18px;
     bottom: 4px;
     font-size: 12px;
-    color: rgba(234,248,255,1);
-        &.left { 
-            color: #b0b0b0;
-        } 
+    color: rgba(234, 248, 255, 1);
+    &.left {
+        color: #b0b0b0;
+    }
 }
-.avatar-mes{
+.avatar-mes {
     margin-right: 7px;
-        & a {
-            display: block;    
-            width: 30px;
-            height: 30px;
-                & img{
-                    width: 100%;
-                    height: 100%;
-                    border-radius:50%;
-                    object-fit: cover;
-                }
+    & a {
+        display: block;
+        width: 30px;
+        height: 30px;
+        & img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
+    }
 }
-.picked-mes{
+.picked-mes {
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     font-size: 20px;
     font-weight: 700;
 }
-.mes__unread{
-    width:10px;
-    height:10px;
-        & span{
-            display: block;
-            width: 100%;
-            height: 100%;
-            border-radius:50%;
-            background-color:$blue;
-
-        }
+.mes__unread {
+    width: 10px;
+    height: 10px;
+    & span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: $blue;
+    }
 }

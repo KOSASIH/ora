@@ -1,8 +1,8 @@
-@use "../../scss/"as *;
+@use "../../scss/" as *;
 .product-item {
     margin-bottom: 30px;
     display: flex;
-    &__img{
+    &__img {
         & img {
             border-radius: 5px;
             object-fit: cover;
@@ -11,13 +11,13 @@
         }
     }
 }
-.mb{
+.mb {
     margin-bottom: 40px;
 }
-.post_saved{
+.post_saved {
     cursor: pointer;
     color: #969696;
-       i{
-         font-size:25px;  
-       }
+    i {
+        font-size: 25px;
+    }
 }

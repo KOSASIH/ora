@@ -1,4 +1,4 @@
-@use "../../scss/"as *;
+@use "../../scss/" as *;
 
 .post {
     margin: 10px 0;
@@ -13,7 +13,6 @@
     }
 
     &__title {
-       
         border-radius: 5px 10px;
         border: solid slateblue;
         margin-bottom: 20px;
@@ -24,7 +23,7 @@
         color: #34495e;
         -webkit-user-modify: read-write;
         overflow-wrap: break-word;
-        outline: 0px solid transparent;    
+        outline: 0px solid transparent;
         &:empty::before {
             content: attr(placeholder);
             color: #c4c4c4;
@@ -33,7 +32,6 @@
     }
 
     &__content {
-     
         // border-right: 4px solid slateblue;
         // border-top: 2px solid slateblue;;
         font-size: 18px;
@@ -42,7 +40,7 @@
 
         &:empty::before {
             content: attr(placeholder);
-            color: rgba(0, 0, 0, .8);
+            color: rgba(0, 0, 0, 0.8);
             font-weight: 400;
         }
     }
@@ -77,7 +75,7 @@
 }
 
 .modal {
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -88,7 +86,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsla(0,0%,100%,.5);
+    background-color: hsla(0, 0%, 100%, 0.5);
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     overflow: hidden;
@@ -133,7 +131,6 @@
             font-family: $font-mon;
             border: 1px solid $boder-color;
         }
-    
     }
 
     &__title {
@@ -158,11 +155,10 @@
             position: relative;
             gap: 0 10px;
             padding: 7px;
-            
         }
     }
-    &__category{
-        &-select{
+    &__category {
+        &-select {
             display: block;
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -176,30 +172,30 @@
             border: none;
             font-size: 15px;
         }
-        &-icon{
+        &-icon {
             position: absolute;
-            top:0;
+            top: 0;
             right: 0;
             bottom: 0;
             padding: 0 8px;
             display: flex;
             align-items: center;
-            &-down{
+            &-down {
                 color: #4a5568;
             }
         }
-        &-container{
+        &-container {
             position: relative;
         }
     }
-    &__button{
+    &__button {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0 10px;
         margin-top: 20px;
-        &-content{
+        &-content {
             width: 9rem;
             padding: 12px 0;
             border: 1px solid $boder-color;
@@ -207,7 +203,7 @@
             background-color: unset;
             cursor: pointer;
             font-size: 15px;
-            &.create{
+            &.create {
                 background-color: $blue;
                 color: $white;
             }
@@ -224,7 +220,7 @@
         gap: 0 10px;
         padding: 5px;
         width: 30%;
-        &-icon{
+        &-icon {
             font-size: 18px;
             color: #969696;
         }
@@ -236,23 +232,23 @@
             background: transparent;
         }
     }
-    &__selected{
+    &__selected {
         display: flex;
         align-items: center;
         gap: 0 10px;
-        &-container{
+        &-container {
             display: flex;
             align-items: center;
             text-transform: uppercase;
             border-radius: 3px;
-            color: rgba(0,0,0,.6);
-            background: rgba(0,0,0,.05);
-            gap:0 5px;
+            color: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.05);
+            gap: 0 5px;
             padding: 10px;
         }
-        &-content{
+        &-content {
             font-size: 13px;
-            &.quantity{
+            &.quantity {
                 color: $blue;
             }
         }

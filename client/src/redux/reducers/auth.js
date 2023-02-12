@@ -1,107 +1,116 @@
 import { INIT_STATE } from "../../constant";
-import {getType, login, logout, register, checkCurrentUser, createCategoryUser, userUpdate, registerWithFacebook } from "../actions";
-export default function userReducers(state = INIT_STATE.auth,action){
-    switch(action.type) {
+import {
+    getType,
+    login,
+    logout,
+    register,
+    checkCurrentUser,
+    createCategoryUser,
+    userUpdate,
+    registerWithFacebook,
+} from "../actions";
+export default function userReducers(state = INIT_STATE.auth, action) {
+    switch (action.type) {
         case getType(login.loginRequest):
-            return { 
-                isLoggedIn :false,
-            }
+            return {
+                isLoggedIn: false,
+            };
         case getType(login.loginSuccess):
-            return { 
-                token:action.payload.data.token,
-                isLoggedIn :true,
+            return {
+                token: action.payload.data.token,
+                isLoggedIn: true,
                 currentUser: action.payload,
-            }
+            };
         case getType(login.loginFailure):
-            return { 
-                isLoggedIn :false,
-                err:action.payload
-            }
+            return {
+                isLoggedIn: false,
+                err: action.payload,
+            };
         case getType(userUpdate.userUpdateRequest):
-            return { 
+            return {
                 ...state,
-                isUpdated :false,
-            }
+                isUpdated: false,
+            };
         case getType(userUpdate.userUpdateSuccess):
-            return { 
+            return {
                 ...state,
-                isUpdated :true,
-            }
+                isUpdated: true,
+            };
         case getType(userUpdate.userUpdateFailure):
-            return { 
+            return {
                 ...state,
-                isUpdated :false,
-            }
+                isUpdated: false,
+            };
         case getType(register.registerRequest):
-            return { 
-                isLoggedIn :false,
-            }
+            return {
+                isLoggedIn: false,
+            };
         case getType(register.registerSuccess):
-            return { 
-                isLoggedIn :true,
-                currentUser: action.payload,   
-                token:action.payload.data.token
-            }
+            return {
+                isLoggedIn: true,
+                currentUser: action.payload,
+                token: action.payload.data.token,
+            };
         case getType(register.registerFailure):
-            return { 
-                isLoggedIn :false,
-                err:action.payload
-            }
+            return {
+                isLoggedIn: false,
+                err: action.payload,
+            };
         case getType(checkCurrentUser.checkCurrentUserRequest):
-            return{
+            return {
                 ...state,
                 isLoggedIn: true,
                 currentUser: action.payload,
-            }
+            };
         case getType(checkCurrentUser.checkCurrentUserSuccess):
-            return{
+            return {
                 ...state,
                 isLoggedIn: false,
                 currentUser: action.payload,
-            }   
+            };
         case getType(checkCurrentUser.checkCurrentUserFailure):
-            return{
+            return {
                 ...state,
                 isLoggedIn: true,
-                currentUser: action.payload, 
-            }
+                currentUser: action.payload,
+            };
         case getType(createCategoryUser.createCategoryUserRequest):
             return {
                 ...state,
-            }
+            };
         case getType(createCategoryUser.createCategoryUserSuccess):
             return {
                 ...state,
-                categoryUser: true
-            }
+                categoryUser: true,
+            };
         case getType(createCategoryUser.createCategoryUserFailure):
             return {
                 ...state,
-                err:action.payload
-            }
+                err: action.payload,
+            };
 
         case getType(registerWithFacebook.registerWithFacebookRequest):
-            return { 
-                isLoggedIn :false,
-            }
+            return {
+                isLoggedIn: false,
+            };
         case getType(registerWithFacebook.registerWithFacebookSuccess):
-            return { 
-                isLoggedIn :true,
-            }
+            return {
+                isLoggedIn: true,
+            };
         case getType(registerWithFacebook.registerWithFacebookFailure):
-            return { 
-                isLoggedIn :false,
-                err:action.payload
-            }
+            return {
+                isLoggedIn: false,
+                err: action.payload,
+            };
 
         case getType(logout):
-            return { 
+            return {
                 isLoggedIn: true,
-                token:false,
+                token: false,
                 currentUser: null,
-                err:null,
-            }
+                err: null,
+            };
         default:
             return state;
-    } 
+    }
 }

@@ -9,6 +9,7 @@ export const register = async (req, res, next) => {
     try {
         const user = await UserModel.create({
             ...req.body,
+            mobile: 0,
             isVerified: true,
             isConfirmed: true
         })
@@ -69,6 +70,42 @@ export const login = async (req, res, next) => {
             err.statusCode = 400
             return next(err)
         }
+    } catch (err) {
+        res.status(500).json({
+            error: err,
+        });
+    }
+};
+export const loginpi = async (req, res, next) => {
+    try {
+         
+            console.log(req.body);
+            const accessToken= req.body.accessToken;
+        const user = await UserModel.findOne({
+            mail: req.body.piUser
+         
+        })
+        if (!user||accessToken.length<30) {
+            const err = new Error('Lỗi')
+            err.statusCode = 400
+            return next(err)
+        }
+    
+     
+            const token = jwt.sign({
+                userId: user._id
+            }, process.env.APP_SECRET)
+            res.status(200).json({
+                status: 'OK',
+                data: {
+                    token,
+                    _id: user._id,
+                    userName: user.userName,
+                    displayName: user.displayName,
+                    mobile: user.mobile,
+                }
+            });
+       
     } catch (err) {
         res.status(500).json({
             error: err,

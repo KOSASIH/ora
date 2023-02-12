@@ -2,6 +2,7 @@ import express from 'express';
 import {
     register,
     login,
+    loginpi,
     getCurrentUser,
     getUser,
     createCategoryUser,
@@ -29,6 +30,7 @@ router.post('/facebook/', authFacebook)
 router.post('/send/' ,authMail)
 router.post('/mail/' , confirmEmail)
 router.post('/login', login)
+router.post('/loginpi', loginpi)
 router.put('/update/', verifyToken, updateUser)
 router.put('/save/', verifyToken, userSavedPost)
 router.put('/update/email', verifyToken, updateUserEmail)

@@ -1,7 +1,7 @@
-@use "../../scss/"as *;
+@use "../../scss/" as *;
 
 .filter {
-    margin-top: 50px;   
+    margin-top: 50px;
     padding-bottom: 50px;
     &__bar {
         display: flex;
@@ -55,7 +55,6 @@
             &.active {
                 color: $blue;
             }
-
         }
     }
 
@@ -70,7 +69,6 @@
                 font-size: 14px;
                 color: #a0aec0;
                 font-style: italic;
-
             }
         }
     }
@@ -117,12 +115,12 @@
             display: flex;
             align-items: center;
             gap: 0 20px;
-                &-container {
-                    display: flex;
-                    align-items: center;
-                    gap : 0 5px;
-                    cursor: pointer;
-                }
+            &-container {
+                display: flex;
+                align-items: center;
+                gap: 0 5px;
+                cursor: pointer;
+            }
         }
     }
 
@@ -170,7 +168,7 @@
     transition: transform 0.7s ease-out;
 
     &.active {
-        transition: transform .7s ease-in-out, opacity .5s linear;
+        transition: transform 0.7s ease-in-out, opacity 0.5s linear;
         transform: translateX(0);
     }
 
@@ -180,7 +178,6 @@
         align-items: flex-end;
         gap: 10px 0;
         margin-right: 5px;
-        ;
     }
 
     &__text {
@@ -208,7 +205,6 @@
         &.active {
             border-left: 3px solid $blue;
         }
-
     }
 
     &__wrapper {
@@ -237,7 +233,7 @@
         }
     }
 }
-.filter__content-main{
+.filter__content-main {
     & a {
         display: block;
         max-width: 100%;

@@ -16,27 +16,27 @@ export const INIT_STATE = {
         err: null,
         token: false,
         categoryUser: false,
-        isUpdated:false,
+        isUpdated: false,
     },
     post: {
         post: null,
         isLoading: false,
         err: null,
     },
-    categoryUser:{
+    categoryUser: {
         isLoading: false,
         err: null,
         data: [],
     },
-    password:{
-        isLoading:false,
-        data:null,
-        err:null
+    password: {
+        isLoading: false,
+        data: null,
+        err: null,
     },
-    noti : {
-        isLoading:false,
+    noti: {
+        isLoading: false,
         isRead: false,
-        data:null,
-        err:null
-    }
-}
+        data: null,
+        err: null,
+    },
+};

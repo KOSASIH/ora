@@ -1,5 +1,9 @@
-import axios from "axios";
 import platformAPIClient from "../config/platformAPIClient.js";
+import { paymentModel } from "../models/paymentModel.js";
+import { UserModel } from "../models/UserModel.js";
+import { withdrawModel } from "../models/a2uModel.js";
+import {createWithdraw,createTxid,completeWithdraw,incompleteWithdraw,cancelWithdraw} from "../config/a2u.js"
+
 export default function mountPaymentsEndpoints(router) {
   // handle the incomplete payment
   router.post('/incomplete', async (req, res) => {
@@ -8,71 +12,62 @@ export default function mountPaymentsEndpoints(router) {
     const txid = payment.transaction && payment.transaction.txid;
     const txURL = payment.transaction && payment.transaction._link;
 
-    
-    // find the incomplete order
-    const app = req.app;
-    const orderCollection = app.locals.orderCollection;
-    const order = await orderCollection.findOne({ pi_payment_id: paymentId });
-
-    // order doesn't exist 
-    if (!order) {
-      return res.status(400).json({ message: "Không tìm thấy yêu cầu" });
+    try {
+      await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid });
+      return res.status(200).json({ message: `Giao dich thanh cong ${paymentId}` });
+    } 
+    catch (err) {
+      res.status(500).json({
+        error: err,
+    });
     }
-
-    // check the transaction on the Pi blockchain
-    const horizonResponse = await axios.create({ timeout: 20000 }).get(txURL);
-    const paymentIdOnBlock = horizonResponse.data.memo;
-
-    // and check other data as well e.g. amount
-    if (paymentIdOnBlock !== order.pi_payment_id) {
-      return res.status(400).json({ message: "Không khớp giao dịch" });
-    }
-
-    // mark the order as paid
-    // await orderCollection.updateOne({ pi_payment_id: paymentId }, { $set: { txid, paid: true } });
-
-    // let Pi Servers know that the payment is completed
-    await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid });
-    return res.status(200).json({ message: `Giao dich thanh cong ${paymentId}` });
+   
   });
 
   // approve the current payment
   router.post('/approve', async (req, res) => {
-   
-
-    const app = req.app;
-
-    const paymentId = req.body.paymentId;
-    const currentPayment = await platformAPIClient.get(`/v2/payments/${paymentId}`);
-    const orderCollection = app.locals.orderCollection;
-
-    /* 
-      implement your logic here 
-      e.g. creating an order record, reserve an item if the quantity is limited, etc...
-    */
-
+  const paymentId = req.body.paymentId;
+  const userPi = req.body.paymentData.memo.slice(3);
+  console.log(userPi);
+ const currentPayment = await platformAPIClient.get(`/v2/payments/${paymentId}`);
+    const creatPayment = await paymentModel.create({
+      user: userPi,
+      balance: + 1,   
+      paymentId: paymentId, 
+      txid: "",
+      paid: false,
+      cancelled: false,
+    })
     
 
+      res.status(200).json({
+          status: 'OK',
+          data:{
+            creatPayment
+          }
+      })
+  
     // let Pi Servers know that you're ready
     await platformAPIClient.post(`/v2/payments/${paymentId}/approve`);
-    return res.status(200).json({ message: `Đợi xác nhận giao dịch ${paymentId}` });
+  
   });
 
   // complete the current payment
   router.post('/complete', async (req, res) => {
-    const app = req.app;
-
+    const userPi = req.body.paymentData.memo.slice(3);
+    console.log(userPi);
     const paymentId = req.body.paymentId;
     const txid = req.body.txid;
-    const orderCollection = app.locals.orderCollection;
-
-    /* 
-      implement your logic here
-      e.g. verify the transaction, deliver the item to the user, etc...
-    */
-
-    // await orderCollection.updateOne({ pi_payment_id: paymentId }, { $set: { txid: txid, paid: true } });
-
+    const completePayment = await paymentModel.findOneAndUpdate({ paymentId: paymentId },  { txid: txid, paid: true  })
+    const Balance = await UserModel.findOne({userName: userPi});
+    const UpdateBalance = await UserModel.findOneAndUpdate({ userName: userPi },  { mobile: Balance.mobile + 0.99 })
+    const ref = await UserModel.findOne({userName: userPi},{identification:1});
+    if (ref.identification) {
+      console.log("Ref of ",ref.identification);
+      const BalanceRef = await UserModel.findOne({ userName: ref.identification });
+      const UpdateBalanceRef = await UserModel.findOneAndUpdate({ userName: ref.identification},  { mobile: BalanceRef.mobile + 0.01 })
+    }
+   
     // let Pi server know that the payment is completed
     await platformAPIClient.post(`/v2/payments/${paymentId}/complete`, { txid });
     return res.status(200).json({ message: `Hoàn thành giao dịch ${paymentId}` });
@@ -80,17 +75,69 @@ export default function mountPaymentsEndpoints(router) {
 
   // handle the cancelled payment
   router.post('/cancelled_payment', async (req, res) => {
-    const app = req.app;
+const paymentId = req.body.paymentId;
 
-    const paymentId = req.body.paymentId;
-    const orderCollection = app.locals.orderCollection;
-
-    /*
-      implement your logic here
-      e.g. mark the order record to cancelled, etc...
-    */
-
-    // await orderCollection.updateOne({ pi_payment_id: paymentId }, { $set: { cancelled: true } });
+const cancelledPayment = await paymentModel.findOneAndUpdate({ paymentId: paymentId },  { cancelled: true })
+   
     return res.status(200).json({ message: `Hủy giao dịch ${paymentId}` });
   })
+
+  router.post('/withdraw', async (req, res) => {
+    const userUid = await req.body.piId
+    const amount = await req.body.amount
+    const piName = await req.body.Piname
+    
+    const paymentData = 
+    {
+      amount: amount,
+      memo: "WithDraw", // this is just an example
+     metadata: {withdraw: "Piora"},
+       uid: userUid }
+       console.log("lol",paymentData);
+    try {
+      console.log(paymentData);
+      const creatWithdrawModel = await withdrawModel.create({
+       uid: userUid,
+       piName: piName,
+        balance: amount,
+        memo: "WithDraw", // this is just an example
+       metadata: {withdraw: "Piora"},
+         })
+      const paymentId = await createWithdraw(paymentData);
+    if (paymentId) {
+      console.log("paymentId",paymentId)
+      const checkDouble = await withdrawModel.find({paymentId: paymentId});
+      if (checkDouble.length!==0)  return res.status(400).json({ message: "Double pay" })
+      else {
+        const updatepaymentId = await withdrawModel.findOneAndUpdate({  uid: userUid },  { paymentId: paymentId })
+        console.log(updatepaymentId);
+       const txId = await createTxid(paymentId);
+               if(txId) { console.log("txid",txId)
+                          const updatepaymentTxid = await withdrawModel.findOneAndUpdate({ paymentId: paymentId  },  { txid:txId })
+                         const completeW = await completeWithdraw(paymentId,txId)
+                         
+                         const UpdateBalance = await UserModel.findOneAndUpdate({ mail: piName },  { mobile: 0})
+                         console.log("Done",updatepaymentTxid,"status",completeW, "balance", UpdateBalance)
+                         return res.status(200).json({ message: `Đã tạo giao dịch ${completeW}` })
+ }
+      }
+    
+   
+ } 
+ else {
+const getIncompleteWithdraw = await incompleteWithdraw();
+if (getIncompleteWithdraw) {
+  console.log("IncompleteWithdraw",getIncompleteWithdraw.incomplete_server_payments[0].identifier);
+  const calceledWithdraw =  await cancelWithdraw(getIncompleteWithdraw.incomplete_server_payments[0].identifier);
+  console.log("huy giao dich",calceledWithdraw);
+}
+ }
+ }
+    catch (err) {
+      res.status(500).json({
+        error: err,
+    });
+    }
+   
+  });
 }
