@@ -2,7 +2,7 @@
 ## **Features**
 
 - Authentication with Pi Browser
-- Donate, tip with Pi Account
+- Donate, tip, withdraw with Pi Account
 - CRUD Post, Comment, Search
 - Realtime Chat
 - Notifications
