@@ -4,7 +4,9 @@ import PostItem from "../../components/PostItem/PostItem";
 import "./search.scss";
 import axios from "axios";
 import UsersSearch from "../../components/UsersSearch/UsersSearch";
+import { useTranslation } from "react-i18next";
 const Search = () => {
+    const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
@@ -24,7 +26,7 @@ const Search = () => {
             <div className="search__container">
                 <div className="search__heading">
                     <h3 className="search__heading-name">
-                        Kết quả tìm kiếm:
+                        {t("resultsearch")}
                         <span> "{query}"</span>
                     </h3>
                 </div>
@@ -43,7 +45,7 @@ const Search = () => {
                                     >
                                         <Link to="/" className="search__content-nav-link">
                                             <i className="search__content-nav-icon bx bxs-file"></i>
-                                            <span className="search__content-nav-text">Bài viết</span>
+                                            <span className="search__content-nav-text">{t("posts")}</span>
                                         </Link>
                                     </div>
                                 </li>
@@ -58,7 +60,7 @@ const Search = () => {
                                     >
                                         <Link to="/" className="search__content-nav-link">
                                             <i className="search__content-nav-icon bx bxs-user"></i>
-                                            <span className="search__content-nav-text">Người dùng</span>
+                                            <span className="search__content-nav-text">{t("users")}</span>
                                         </Link>
                                     </div>
                                 </li>

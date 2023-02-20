@@ -335,7 +335,7 @@ const Header = () => {
                                                                                   key={notification._id}
                                                                               />
                                                                           ))
-                                                                        : "Không có gì xem ở đây cả"}
+                                                                        : t("nothinghere") }
                                                                 </ul>
                                                             </div>
                                                             <footer className="header__notify-footer">
@@ -391,7 +391,7 @@ const Header = () => {
                                                                     {t("balance")+": "}
                                                                         {currentUser.currentUser.mobile
                                                                             ? currentUser.currentUser.mobile
-                                                                            : currentUser.currentUser.userName} </Link>
+                                                                            : "0" } Pi</Link>
                                                                     </span>
                                                                 </div>
                                                             </Link>

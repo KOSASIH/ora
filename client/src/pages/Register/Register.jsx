@@ -83,6 +83,7 @@ const Register = () => {
                             value={data.userName}
                             onChange={(e) => setData({ ...data, userName: e.target.value })}
                         />
+                        <p>{t("note1")}</p>
                         <input
                             type="text"
                             placeholder={t("display_name")}
@@ -117,16 +118,7 @@ const Register = () => {
                                 })
                             }
                         />
-                        {/* <input
-              type="text"
-              placeholder="..."
-              name="identification"
-              value={data.identification}
-              onChange={(e) =>
-                setData({ ...data, identification: e.target.value })
-              }
-              className="login__form-input"
-            /> */}
+                  <p>{t("note2")}</p>
                         <button className="login__form-button" name="btnSubmit" type="submit" onClick={onSubmit}>
                             {t("register")}
                         </button>

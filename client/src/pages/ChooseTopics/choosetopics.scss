@@ -15,12 +15,13 @@
                 font-weight: 700;
             }
             &-button {
+                margin-top: 15px;
                 color: $white;
                 background-color: $blue-2;
                 width: 135px;
-                height: 30px;
+                height: 40px;
                 text-align: center;
-                border-radius: 20px;
+                border-radius: 10px;
             }
         }
     }

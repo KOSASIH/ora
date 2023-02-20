@@ -18,8 +18,8 @@ const Suggest = () => {
                 <div className="grid">
                     <div className="row">
                         <div className="col c-12 m-5 l-5">
-                            {posts.data.slice(0, 1).map((post) => (
-                                <div className="suggest__content">
+                            {posts.data.slice(0, 1).map((post, idx) => (
+                                <div className="suggest__content" key={idx}>
                                     <div className="suggest__content-img-left">
                                         <Link to={`/post/${post.slug}`}>
                                             <img
@@ -119,8 +119,8 @@ const Suggest = () => {
                         <div className="col c-12 m-7 l-7" id="slideBar">
                             <div className="gird">
                                 <div className="row">
-                                    {posts.data.slice(0, 3).map((post) => (
-                                        <div className="col l-12">
+                                    {posts.data.slice(0, 3).map((post, idx) => (
+                                        <div className="col l-12" key={idx}>
                                             <div className="suggest__content">
                                                 <div className="grid">
                                                     <div className="row">

@@ -9,6 +9,8 @@ import reducers from "./redux/reducers";
 import mySaga from "./redux/sagas";
 import { CookiesProvider } from "react-cookie";
 import "./lang/config/i18n";
+import Modal from "./components/modal";
+import { ModalProvider } from "./components/modal/ModalContext";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = legacy_createStore(reducers, applyMiddleware(sagaMiddleware));
@@ -16,7 +18,10 @@ sagaMiddleware.run(mySaga);
 ReactDOM.render(
     <CookiesProvider>
         <Provider store={store}>
-            <App />
+            <ModalProvider>
+                <App />
+                <Modal />
+            </ModalProvider>
         </Provider>
     </CookiesProvider>,
     document.getElementById("root")

@@ -58,12 +58,12 @@ const ChooseTopics = () => {
             <div className="topics__container">
                 <header className="topics__header">
                     <div className="topics__header-top">
-                        <h3 className="topics__header-top-title">Bắt đầu vào việc theo dõi chủ đề bạn quan tâm</h3>
+                        <h3 className="topics__header-top-title">{t("choosetopic")}</h3>
                         <button className="topics__header-top-button" type="submit" onClick={onSubmit}>
-                            Xác nhận
+                          {t("confirm")}
                         </button>
                     </div>
-                    <p>Chúng tôi sẽ giúp bạn dễ dàng tiếp cận các bài viết trong chủ đề này</p>
+                    <p>{t("wewwillmakeitease")}</p>
                 </header>
                 <main className="topics__content">
                     <div className="grid">

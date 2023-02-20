@@ -8,6 +8,9 @@ import { userState$, passwordState$ } from "../../redux/selectors";
 import { useTranslation } from "react-i18next";
 import { withdrawPi } from "../../components/pisdk/pisdk.tsx";
 import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
+import Loader from "../../components/Loader/Loader";
+import { useModalContext } from "../../components/modal/ModalContext";
+
 const UserSettings = () => {
     const { t, i18n } = useTranslation();
     // const changeLanguageHandler = (e) => {
@@ -31,14 +34,7 @@ const UserSettings = () => {
     const [isErr, setIsErr] = useState(null);
     const [isSuccessEmail, setIsSuccessEmail] = useState(null);
     const [isErrEmail, setIsErrEmail] = useState(null);
-    const [dataEmail, setDataEmail] = useState({
-        mail: "",
-        password: "",
-    });
-    const [errorMail, setErrorMail] = useState({
-        mail: "",
-        password: "",
-    });
+    const [isLoading, setIsLoading] = useState(false);
     const [dataPassword, setDataPassword] = useState({
         oldPassword: "",
         password: "",
@@ -49,6 +45,8 @@ const UserSettings = () => {
         confirmPassword: "",
         oldPassword: "",
     });
+
+    const { openModal } = useModalContext();
     const onInputChange = (e) => {
         const { name, value } = e.target;
         setDataPassword((prev) => ({
@@ -78,16 +76,16 @@ const UserSettings = () => {
                     break;
                 case "password":
                     if (dataPassword.confirmPassword && value !== dataPassword.confirmPassword) {
-                        stateObj["confirmPassword"] = "Mật khẩu nhập lại khum chính xác.";
+                        stateObj["confirmPassword"] = "Mật khẩu nhập lại không chính xác.";
                     } else if (dataPassword.oldPassword && value === dataPassword.oldPassword) {
-                        stateObj[name] = "Mật khẩu mới khum được giống mật khẩu cũ";
+                        stateObj[name] = "Mật khẩu mới không được giống mật khẩu cũ";
                     } else if (value.length < 9) {
                         stateObj[name] = "Mật khẩu phải có tối thiểu 9 kí tự và ít hơn 100 kí tự.";
                     }
                     break;
                 case "confirmPassword":
                     if (dataPassword.password && value !== dataPassword.password) {
-                        stateObj[name] = "Mật khẩu nhập lại khum chính xác";
+                        stateObj[name] = "Mật khẩu nhập lại không chính xác";
                     }
                     break;
                 default:
@@ -96,35 +94,7 @@ const UserSettings = () => {
             return stateObj;
         });
     };
-    const onInputEmailChange = (e) => {
-        const { name, value } = e.target;
-        setDataEmail((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-        validateInputEmail(e);
-    };
-    const validateInputEmail = (e) => {
-        let { name, value } = e.target;
-        setErrorMail((prev) => {
-            const stateObj = { ...prev, [name]: "" };
-            switch (name) {
-                case "mail":
-                    if (!/.+@.+\.[A-Za-z]+$/.test(value)) {
-                        stateObj[name] = "khum hợp lệ.";
-                    }
-                    break;
-                case "password":
-                    if (value.length < 6) {
-                        stateObj[name] = "Mật khẩu khum hợp lệ";
-                    }
-                    break;
-                default:
-                    break;
-            }
-            return stateObj;
-        });
-    };
+
     useEffect(() => {
         if (currentUser.currentUser) {
             setDataUser(currentUser.currentUser);
@@ -243,27 +213,49 @@ const UserSettings = () => {
     }, [isSuccessEmail]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            // toast.current.style.animation = "hide_slide 1s ease forwards";
+            if (toast.current?.style) {
+                toast.current.style.animation = "hide_slide 1s ease forwards";
+            }
         }, 4000);
         return () => clearTimeout(timer);
     }, [isErr, isSuccess, isErrEmail, isSuccessEmail]);
     useEffect(() => {
         document.title = `${t("user_setting")}`;
     }, [currentUser]);
-    const withDraw = useCallback(async (e) => {
-        e.preventDefault();
-        const piB =isPiBrowser()
-        if (!piB) return alert(t("notPiBrowser"))
+
+    async function withDraw() {
+       const piB = isPiBrowser();
+        if (!piB) { 
+             openModal(<div>{t("notPiBrowser")}</div>);  } 
         else {
-            const balance = await dataUser.mobile - 0.1
-            withdrawPi(balance, dataUser.mail);
+             const aa = await currentUser.currentUser;
+            if (aa.mobile==0)   openModal(<div>{t("0 Pi")}</div>);
+       else if (aa.mobile && aa.mail) {
+                setIsLoading(true);
+                const balance = aa.mobile - 0.1; 
+                const mail = aa.mail;
+                try {
+                    const txId = await withdrawPi(balance, mail);
+                    openModal(
+                        <div style={
+                            { width: "300px",
+                              padding: "10px"
+                        }}>
+                            <p style={{textAlign:"center"}}><b>{t("success")}</b></p>
+                            <p style={{overflowWrap:"break-word"}}> <b>Txid:</b> {txId}</p></div>);
+                } catch (err) {
+                    openModal(<div>{err}</div>);
+                } finally {
+                    setIsLoading(false);
+                    setDataUser({ ...dataUser, mobile: 0 });
+                   
+                }
+            }
         }
-      
-
-
-    },[]);
+    }
     return (
         <div className="container">
+            {isLoading ? <Loader /> : ""}
             {isSuccessEmail ? (
                 <div className="toast-mess-container">
                     <button ref={toast} className={`alert-toast-message success`}>
@@ -674,10 +666,7 @@ const UserSettings = () => {
                                                     />
                                                 </div>
                                                 <div className="settings__flex-item">
-                                                    <button
-                                                        className="withdraw"
-                                                        onClick={withDraw}
-                                                    >
+                                                    <button className="withdraw" onClick={withDraw}>
                                                         {t("withdraw")}
                                                     </button>
                                                 </div>
@@ -687,14 +676,6 @@ const UserSettings = () => {
                                             <button className="settings__actions cancle">
                                                 <Link to="/">{t("cancel")}</Link>
                                             </button>
-                                            {/* <button
-                        type="submit"
-                        className={`settings__actions save ${!disableSave ? "active" : ""}`}
-                        onClick={onSave}
-                        disabled={disableSave}
-                      >
-                        Lưu
-                      </button> */}
                                             <button type="submit" className="settings__actions save" onClick={onSave}>
                                                 {t("save")}
                                             </button>

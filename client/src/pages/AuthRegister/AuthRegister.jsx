@@ -106,12 +106,12 @@ const AuthRegister = () => {
                         <div className="auth__logging">
                             {!visible ? (
                                 <>
-                                    <p className="auth__logging-tilte">{t("sign_up_with_pi_browser")}</p>
+                                  
                                     <form className="auth__logging-email" onSubmit={handleSubmit}>
                                         <div className="auth__logging-email-sending">
                                             <div className="piauth">
                                                 <button type="submit" value="Xác nhận" onClick={handleAuthMail}>
-                                                    {t("auth_with_pi_browser")}
+                                                    {t("sign_up_with_pi_browser")}
                                                 </button>
                                             </div>
                                         </div>

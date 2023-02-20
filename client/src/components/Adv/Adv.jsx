@@ -15,17 +15,6 @@ const Adv = () => {
         const piB =isPiBrowser()
         if (!piB) return alert(t("notPiBrowser"))
        else  donatePi("to Piora", 1, { To: "Piora" });
-
-        // const option  ={
-        //   method: "post",
-        //   url:``,
-        //   data: ''
-        // }
-
-        //   const response = await axios(option)
-        //   setMessages(response.data.data)
-        //  if (response.data.status=='OK') setVisible(!visible)
-        //   setErr(false)
     }, []);
     return (
         <div className="adv">
@@ -71,12 +60,12 @@ const Adv = () => {
                 </div>
             </div>
             <div className="adv__contact box-shadow ">
-                <p className="adv__contact-heading">LINK</p>
+                <p className="adv__contact-heading">{t("link")}</p>
                 <div className="adv__contact-social">
                     <ul className="adv__contact-social-list">
                         <li className="adv__contact-social-item"></li>
                         <Link
-                            to="https://www.facebook.com/profile.php?id=100089642546736"
+                            to="https://facebook.com/profile.php?id=100089642546736"
                             className="adv__contact-social-link"
                         >
                             <i className="adv__contact-social-icon fb bx bxl-facebook-square"></i>
@@ -84,14 +73,14 @@ const Adv = () => {
                         </Link>
 
                         <li className="adv__contact-item">
-                            <Link to="/" className="adv__contact-social-link">
+                            <Link to="https://www.youtube.com/@pioraofficial" className="adv__contact-social-link">
                                 <i className=" adv__contact-social-icon yt bx bxl-youtube"></i>
                                 <span className="adv__contact-social-text">Piora Youtube</span>
                             </Link>
                         </li>
 
                         <li className="adv__contact-item">
-                            <Link to="/" className="adv__contact-social-link">
+                            <Link to="mailto:contact@piora.space" className="adv__contact-social-link">
                                 <i className="adv__contact-social-icon chat bx bxs-conversation"></i>
                                 <span className="adv__contact-social-text">Feedback Piora</span>
                             </Link>
@@ -103,19 +92,14 @@ const Adv = () => {
                 <ul className="adv__about-list">
                     <li className="adv__about-item">
                         <Link to="/post/terms-of-use" className="adv__about-link">
-                            <span className="adv__about-text">TERMS</span>
+                            <span className="adv__about-text">{t("TERMS_OF_USE")}</span>
                         </Link>
                     </li>
                     <li className="adv__about-item">
                         <Link to="/post/privacy-policy" className="adv__about-link">
-                            <span className="adv__about-text">POLICY</span>
+                            <span className="adv__about-text">{t("policy")}</span>
                         </Link>
                     </li>
-                    {/* <li className="adv__about-item">
-                        <Link to="/" className="adv__about-link">
-                            <span className="adv__about-text">FANPAGE</span>
-                        </Link>
-                    </li> */}
                 </ul>
                 <span className="adv__about-text">© 2023 ORA LAB</span>
             </div>

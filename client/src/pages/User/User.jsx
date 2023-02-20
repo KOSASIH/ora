@@ -9,6 +9,8 @@ import { userState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import { donatePi } from "../../components/pisdk/pisdk.tsx";
 import { useTranslation } from "react-i18next";
+import isPiBrowser from "../../components/isPiBrowser/isPiBrowser";
+import { isDate } from "moment";
 const User = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -21,8 +23,11 @@ const User = () => {
     const slider = useRef(null);
     const tab = searchParams.get("tab");
     const [userId, setUserId] = useState([]);
+    const [isBlockedPost, setisBlockedPost] = useState(false);
+    const [isBlockedCmt, setisBlockedCmt] = useState(false);
     const { username } = useParams();
     const [postsSaved, setPostsSaved] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
     const sliderSettings = {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -41,8 +46,11 @@ const User = () => {
     useEffect(() => {
         if (currentUser) {
             setUserId([currentUser.user._id]);
+            setisBlockedPost(currentUser.user.isBlockedAll)
+            setisBlockedCmt(currentUser.user.isBlockedCmt)
         }
     }, [currentUser]);
+
     const getPostsByUser = useCallback(async () => {
         const option = {
             method: "get",
@@ -88,23 +96,15 @@ const User = () => {
         [currentUser]
     );
     //Donate Pi
-    const donate = useCallback(async (e) => {
-        e.preventDefault();
-        const donated = await donatePi("Donate", 0.01, {
-            To: currentUser.user._id,
-        });
-        console.log("Giao dich: ", donated);
-        // const option  ={
-        //   method: "post",
-        //   url:``,
-        //   data: ''
-        // }
+    async function tip() {
+        const piB = isPiBrowser();
+        if (!piB) return alert("You need to use Pi Browser for tip!");
+        else {
+            const userPi = currentUser.user.userName;
 
-        //   const response = await axios(option)
-        //   setMessages(response.data.data)
-        //  if (response.data.status=='OK') setVisible(!visible)
-        //   setErr(false)
-    }, []);
+            if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
+        }
+    }
     const handelUnFlow = useCallback(
         async (e) => {
             const token = localStorage.getItem("token");
@@ -137,6 +137,90 @@ const User = () => {
                     },
                 };
                 await axios(option);
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleBlockCmt = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockCmt";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/block/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+                alert("OK");
+            setisBlockedCmt(true)
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleUnBlockCmt = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockCmt";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/unblock/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+                alert("OK");
+                setisBlockedCmt(false)
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleBlockAll = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockAll";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/block/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+              alert("OK");
+            setisBlockedPost(true)
+            } catch (err) {}
+        },
+        [userId]
+    );
+    const handleUnBlockAll = useCallback(
+        async (e) => {
+            const token = localStorage.getItem("token");
+            const type = "blockAll";
+            try {
+                e.preventDefault();
+                const option = {
+                    method: "put",
+                    url: `/api/v1/auth/unblock/`,
+                    data: {userId, type},
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                };
+                await axios(option);
+              alert("OK");
+              setisBlockedPost(false);
             } catch (err) {}
         },
         [userId]
@@ -187,6 +271,17 @@ const User = () => {
         [notiId]
     );
     useEffect(() => {
+        if (userState.currentUser) {
+            if (
+                userState.currentUser._id==='63eb04c5c38d69c8d78052a8'||
+                userState.currentUser._id==='63eae6f5c38d69c8d780506e' ||
+                userState.currentUser._id==='63eb6d41c38d69c8d78057e0'
+                 ) {
+                setIsAdmin(true);
+            }
+        }
+    }, [ currentUser]);
+    useEffect(() => {
         updateNoti();
     }, [updateNoti]);
     return userState.currentUser
@@ -199,22 +294,7 @@ const User = () => {
                       <div className="user__profile">
                           <div className="user__profile-content">
                               <div className="user__profile-sidebar">
-                                  <div
-                                      className="user__profile-dynamic"
-                                      style={
-                                          visible
-                                              ? {
-                                                    height: "800px",
-                                                    maxHeight: "50%",
-                                                    top: "160px",
-                                                }
-                                              : {
-                                                    height: "800px",
-                                                    maxHeight: "50%",
-                                                    top: "-200px",
-                                                }
-                                      }
-                                  >
+                                  <div className="user__profile-dynamic">
                                       <div className="user__profile-widget">
                                           <div className="user__profile-widget-body">
                                               <div className="user__profile-widget-content">
@@ -285,7 +365,33 @@ const User = () => {
                                                           >
                                                               <span>{t("chat")}</span>
                                                           </button>
+                                                          {isAdmin ? ( 
+                                                        <div className="admin__profile-widget-button">
+                                                            {isBlockedPost ? (  <button
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleUnBlockAll}>
+                                                              <span>UnBlock Post</span>
+                                                          </button>) : (  <button
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleBlockAll}>
+                                                              <span>Block Post</span>
+                                                          </button>) }
+                                                          {isBlockedCmt ? (  <button
+                                                              className="admin__profile-widget-button-item"
+                                                              onClick={handleUnBlockCmt}>
+                                                              <span>UnBlock Cmt</span>
+                                                          </button>) : (  <button
+                                                            className="admin__profile-widget-button-item"
+                                                            onClick={handleBlockCmt}>
+                                                            <span>Block Cmt</span>
+                                                        </button>) }
+                                                           </div>
+
+
+
+                                                          ) :("")} 
                                                       </div>
+                                                      
                                                   )}
                                                   <div className="user__profile-widget-stats">
                                                       <div>
@@ -315,12 +421,12 @@ const User = () => {
                                               </div>
                                               <div className="user__profile-widget-body">
                                                   <p>{t("do_you_love_this_author")}</p>
-                                                  <Link to="/" className="adv__donate-link">
-                                                      <button className="adv__donate-button" onClick={donate}>
+                                                  <div className="adv__donate-link">
+                                                      <button className="adv__donate-button" onClick={tip}>
                                                           <i className="bx bx-donate-heart  adv__donate-icon"></i>
                                                           {t("donate")}
                                                       </button>
-                                                  </Link>
+                                                  </div>
                                               </div>
                                           </div>
                                       </div>
@@ -422,27 +528,12 @@ const User = () => {
               <div className="main">
                   <div className="user">
                       <div className="user__cover">
-                          <img src={currentUser.user.cover.slice(7)} alt="" />
+                          <img src={currentUser?.user?.cover?.slice(7)} alt="" />
                       </div>
                       <div className="user__profile">
                           <div className="user__profile-content">
                               <div className="user__profile-sidebar">
-                                  <div
-                                      className="user__profile-dynamic"
-                                      style={
-                                          visible
-                                              ? {
-                                                    height: "800px",
-                                                    maxHeight: "50%",
-                                                    top: "160px",
-                                                }
-                                              : {
-                                                    height: "800px",
-                                                    maxHeight: "50%",
-                                                    top: "-200px",
-                                                }
-                                      }
-                                  >
+                                  <div className="user__profile-dynamic">
                                       <div className="user__profile-widget">
                                           <div className="user__profile-widget-body">
                                               <div className="user__profile-widget-content">
@@ -479,6 +570,7 @@ const User = () => {
                                                       >
                                                           <span>{t("chat")}</span>
                                                       </button>
+                                                     
                                                   </div>
                                                   <div className="user__profile-widget-stats">
                                                       <div>
@@ -507,10 +599,13 @@ const User = () => {
                                                   <span className="user__profile-widget-title">{t("donate")}</span>
                                               </div>
                                               <div className="user__profile-widget-body">
-                                                  <p>Nếu muốn ủng hộ tác giả, các bạn có thể làm theo hướng dẫn sau.</p>
-                                                  <Link to="/" className="user__profile-widget-donate">
-                                                      <span>{t("donate")}</span>
-                                                  </Link>
+                                                  <p>{t("do_you_love_this_author")}</p>
+                                                  <div className="adv__donate-link">
+                                                      <button className="adv__donate-button" onClick={tip}>
+                                                          <i className="bx bx-donate-heart  adv__donate-icon"></i>
+                                                          {t("donate")}
+                                                      </button>
+                                                  </div>
                                               </div>
                                           </div>
                                       </div>
@@ -539,11 +634,17 @@ const User = () => {
                                           <div className="user__profile-posts-top">
                                               <div className="user__profile-posts-head">
                                                   <div className="user__profile-posts-heading">
-                                                      <span>Bài viết nổi bật</span>
+                                                      <span>{t("feature_posts")}</span>
                                                   </div>
                                               </div>
-                                              <div className="p-4">
-                                                  <TrendingPosts posts={posts.posts} slice={5} slidesToShow={3} />
+                                              <div className="user__profile-posts-all-body">
+                                                  <div className="user__profile-posts-all-content">
+                                                      <div className="grid">
+                                                          {posts.posts.slice(0, 3).map((post) => (
+                                                              <PostItem post={post} key={post._id} />
+                                                          ))}
+                                                      </div>
+                                                  </div>
                                               </div>
                                           </div>
                                           <div className="user__profile-posts-top">

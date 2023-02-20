@@ -140,6 +140,7 @@
 .pull-left {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .vote {
     display: flex;
@@ -463,5 +464,6 @@
     word-break: break-word;
 }
 .tip-post {
-    margin-left: 20px;
+   margin-right: 10px;
+   
 }

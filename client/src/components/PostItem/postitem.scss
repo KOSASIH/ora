@@ -1,23 +1,92 @@
 @use "../../scss/" as *;
+
 .product-item {
-    margin-bottom: 30px;
-    display: flex;
-    &__img {
-        & img {
-            border-radius: 5px;
-            object-fit: cover;
-            width: 100%;
-            height: 140px;
-        }
+  margin-bottom: 30px;
+  display: flex;
+
+  &__img {
+    & img {
+      border-radius: 5px;
+      object-fit: cover;
+      width: 100%;
+      height: 140px;
     }
+  }
 }
+
 .mb {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
+
 .post_saved {
-    cursor: pointer;
-    color: #969696;
-    i {
-        font-size: 25px;
-    }
+  cursor: pointer;
+  color: #969696;
+
+  i {
+    font-size: 25px;
+  }
+}
+
+.mobile-post-item {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  .filter__content-img {
+    width: 120px;
+    flex-shrink: 0;
+  }
+
+  .title-post {
+    
+    max-height: 50px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+  }
+
+  .text-intro {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .filter__content-author {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+  }
+
+  .post-avt {
+    width: 25px;
+    height: 25px;
+  }
+
+  .filter__content-img {
+    height: unset;
+    margin: 0;
+  }
+
+  .content__bottom {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+
+  }
+
+  .filter__content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    
+  }
+  .filter__content-interactive {
+    gap: 0 10px;
+    justify-content: flex-end;
+  }
+  .filter__content-interactive-container {
+    max-height: 10px;
+  }
 }

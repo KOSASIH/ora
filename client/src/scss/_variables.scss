@@ -358,9 +358,11 @@ select {
     border-radius: 3pt;
     padding: 15px;
     &.success {
+
         color: #fff;
         background-color: #198754;
         border-color: #198754;
+        animation: show_slide 1s ease forwards;
     }
     &.err {
         color: #fff;

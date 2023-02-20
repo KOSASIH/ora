@@ -24,8 +24,10 @@ const Post = () => {
     const [voteCountUpdate, setVoteCountUpdate] = useState([]);
     const [isSuccess, setIsSuccess] = useState(null);
     const currentUser = useSelector(userState$);
+    const isBlockCmt = currentUser?.currentUser?.isBlockedCmt;
     const location = useLocation();
     const [isUser, setIsUser] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [visiable, setVisiable] = useState(false);
     const [dataPost, setDataPost] = useState({});
     const [categoryPost, setCategoryPost] = useState({});
@@ -80,10 +82,10 @@ const Post = () => {
         },
         [dataPost._id, isVote]
     );
-    const tip = useCallback(async (e) => {
-        e.preventDefault();
+     async function tip()  {
+      
         const piB =isPiBrowser()
-        if (!piB) return alert("You need to use Pi Browser for tip!")
+        if (!piB) return alert(t("notPiBrowser"))
         else {
             const res = await axios.get(`/api/v1/posts/${path}`);
 
@@ -92,7 +94,7 @@ const Post = () => {
             if (userPi) donatePi(`to ${userPi}`, 1, { To: "Piora" });
         }
       
-    }, []);
+    };
 
     const handleUnVote = useCallback(
         async (e) => {
@@ -139,6 +141,17 @@ const Post = () => {
             }
         }
     }, [authPost, currentUser]);
+    useEffect(() => {
+        if (currentUser.currentUser) {
+            if (
+                currentUser.currentUser._id==='63eb04c5c38d69c8d78052a8'||
+                 currentUser.currentUser._id==='63eae6f5c38d69c8d780506e' ||
+                 currentUser.currentUser._id==='63eb6d41c38d69c8d78057e0'
+                 ) {
+                setIsAdmin(true);
+            }
+        }
+    }, [ currentUser]);
     const handleClickDelete = () => setVisiable(!visiable);
     const handleDelete = useCallback(
         async (e) => {
@@ -344,7 +357,7 @@ const Post = () => {
     }, [updateNoti]);
     useEffect(() => {
         const timer = setTimeout(() => {
-            // toast.current.style.animation = "hide_slide 1s ease forwards";
+            toast.current.style.animation = "hide_slide 1s ease forwards";
         }, 4000);
         return () => clearTimeout(timer);
     }, [isSuccess]);
@@ -373,11 +386,11 @@ const Post = () => {
         <div className="mt-80">
             <div className="post__details-container">
                 {isSuccess ? (
-                    <div className="toast-mess-container">
-                        <button ref={toast} className={`alert-toast-message success`}>
-                            {isSuccess}
-                        </button>
-                    </div>
+                   <div className="toast-mess-container">
+                   <button ref={toast} className={`alert-toast-message success`}>
+                       {isSuccess}
+                   </button>
+               </div>
                 ) : (
                     ""
                 )}
@@ -415,7 +428,7 @@ const Post = () => {
                                 </Link>
                             </div>
                         </div>
-                        {isUser ? (
+                        {isUser || isAdmin ? (
                             <div className="flex-align-gap-10">
                                 <Link to={`/post/update/${path}`}>
                                     <span className="button-data edit">Edit</span>
@@ -437,6 +450,7 @@ const Post = () => {
                 </div>
                 <div className="post__tool-bar">
                     <div className="pull-left">
+                   
                         <div className="vote">
                             <div className="upvote" onClick={handleVote}>
                                 <div>
@@ -458,18 +472,19 @@ const Post = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="view-count">{dataPost.views} views</div>
-                        <div className="tip-post" onClick={tip}>
-                            <i className="bx bx-donate-heart  adv__donate-icon"></i>
-                        </div>
+                      
+                        <div className="view-count">{dataPost.views} {t("view")}</div>
                     </div>
                     <div className="pull-right">
                         <div className="right-tools">
-                            <Link to="/" className="tool">
+                        <div className="tip-post" onClick={tip}>
+                            <i className="bx bx-sm bx-donate-heart  adv__donate-icon"></i>
+                        </div>
+                            {/* <Link to="/" className="tool">
                                 <FacebookShareButton url={shareUrl}>
                                     <FacebookIcon size={40} round={true}></FacebookIcon>
                                 </FacebookShareButton>
-                            </Link>
+                            </Link> */}
                             <div className="bookmark">
                                 <Link to="/" title="Click to save post">
                                     <i className="bx bx-bookmarks"></i>
@@ -535,48 +550,54 @@ const Post = () => {
                         )}
                     </div>
                 </div>
-                <div className="comment__container">
-                    <section className="comment__section">
-                        <div>
-                            <div className="comment__form-container">
-                                <form className="comment__form" ref={inputCmtRef}>
-                                    <input
-                                        className="comment__form-data"
-                                        ref={inputCmtRef}
-                                        placeholder="Comment this post"
-                                        value={dataComment.content}
-                                        onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
-                                    ></input>
-                                    <div className="comment__form-actions" onClick={handleSubmitComment}>
-                                        <div className="comment__form-actions-submit">Send</div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="comment__nav-tab">
-                            <div className="separator"></div>
-                            <ul className="comment__nav-list">
-                                <li className="comment__nav-item active">
-                                    <Link to="/">Hot</Link>
-                                </li>
-                                <li className="comment__nav-item">
-                                    <Link to="/">New</Link>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="comment__tree-view">
-                            <div className="comments">
-                                <div className="comments__node">
-                                    {comments.length > 0
-                                        ? comments.map((comment) => (
-                                              <Comment postId={dataPost?._id} comment={comment} key={comment._id} />
-                                          ))
-                                        : ""}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+
+{isBlockCmt? (<div className="comment__form block"><p>You have been blocked from commenting.</p>
+                                                        </div>):(
+ <div className="comment__container">
+ <section className="comment__section">
+     <div>
+         <div className="comment__form-container">
+             <form className="comment__form" ref={inputCmtRef}>
+                 <input
+                     className="comment__form-data"
+                     ref={inputCmtRef}
+                     placeholder={t("commentthispost")}
+                     value={dataComment.content}
+                     onChange={(e) => setDataComment({ ...dataComment, content: e.target.value })}
+                 ></input>
+                 <div className="comment__form-actions" onClick={handleSubmitComment}>
+                     <div className="comment__form-actions-submit">{t("send")}</div>
+                 </div>
+             </form>
+         </div>
+     </div>
+     {/* <div className="comment__nav-tab">
+         <div className="separator"></div>
+         <ul className="comment__nav-list">
+             <li className="comment__nav-item active">
+                 <Link to="/">Hot</Link>
+             </li>
+             <li className="comment__nav-item">
+                 <Link to="/">New</Link>
+             </li>
+         </ul>
+     </div> */}
+     <div className="comment__tree-view">
+         <div className="comments">
+             <div className="comments__node">
+                 {comments.length > 0
+                     ? comments.map((comment) => (
+                           <Comment postId={dataPost?._id} comment={comment} key={comment._id} isAdmin={isAdmin} />
+                       ))
+                     : ""}
+             </div>
+         </div>
+     </div>
+ </section>
+</div>
+      )}
+
+               
             </div>
             {visiable ? (
                 <div className="modal__delete">

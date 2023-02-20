@@ -137,6 +137,7 @@ const Messages = () => {
     }, [getNotificationsMessage]);
     const handleBack = () => {
         window.location.href = "/";
+        
     };
     return (
         <div className="mes">
@@ -150,7 +151,7 @@ const Messages = () => {
             <div className="mes__main">
                 <div className="mes__sidebar">
                     <div className="mes__search">
-                        <input type="text" placeholder="Tìm theo tên..." className="mes__search-input" />
+                        <input type="text" placeholder={t("searchbyname")} className="mes__search-input" />
                     </div>
                     <ul className="mes__chatlist">
                         {conversations.length > 0
@@ -215,7 +216,7 @@ const Messages = () => {
                                         <input
                                             className="mes__box-input-text"
                                             type="text"
-                                            placeholder="Viết gì đó...."
+                                            placeholder="..."
                                             value={newMessage}
                                             onChange={(e) => setNewMessage(e.target.value)}
                                         />
@@ -226,7 +227,7 @@ const Messages = () => {
                                 </form>
                             </>
                         ) : (
-                            <p className="picked-mes">Chọn một cuộc trò chuyện để bắt đầu!</p>
+                            <p className="picked-mes">{t("choosechat")}</p>
                         )}
                     </ul>
                 </div>

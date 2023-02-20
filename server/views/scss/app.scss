@@ -1,0 +1,39 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+}
+.email{
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 100px;
+    &__container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap : 15px 0 ;
+    }
+    &__title{
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 25px;
+      max-width: 500px;
+      text-align: center;
+    }
+    &__content{
+      font-size: 16px;
+      max-width: 600px;
+      text-align: center;
+    }
+    &__confirm{
+      color: #fff;
+      display: block;
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      background: #2FB5FA;
+      border-radius: 5px;
+    }
+}

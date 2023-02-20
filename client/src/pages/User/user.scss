@@ -136,6 +136,9 @@
             align-items: center;
             justify-content: space-around;
             align-content: center;
+            @include mobile{
+                margin-top:0;
+            }
         }
         &-dynamic {
             width: 340px;
@@ -201,6 +204,7 @@
                 margin: 15px 0;
                 display: flex;
                 justify-content: space-around;
+                flex-wrap: wrap;
                 &-item {
                     padding: 0 18px;
                     height: 2.7rem;
@@ -256,6 +260,10 @@
             grid-template-columns: minmax(0, 1fr);
             grid-gap: 1.2rem;
             grid-template-rows: minmax(min-content, max-content);
+            @include mobile{
+                justify-content: center;
+                margin-top:1rem;
+            }
         }
         &-tabs {
             background-color: $white;
@@ -294,6 +302,33 @@
         }
     }
 }
+
+    .admin__profile-widget-button {
+        margin-top: 15px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .admin__profile-widget-button-item {
+        margin: 15px 15px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+                     padding: 0 18px;
+
+                    height: 2.7rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid rgb(255, 0, 0);
+                    border-radius: 0.25rem;
+                    background-color: #fff;
+                    cursor: pointer;
+                    text-transform: none;
+                    overflow: visible;
+                    font-size: 16px;
+    }
+
 .flow {
     display: flex;
     align-items: center;
@@ -320,4 +355,24 @@
 }
 .p-4 {
     padding: 1rem;
+}
+@include mobile {
+    .user__profile-sidebar {
+        display: block;
+        margin-top: -10px;
+    }
+.user__profile-dynamic {
+    display: block;
+    width: 100%;
+   height: 600px;
+}
+    .user__profile-posts-all-body {
+        padding: 0.5rem 0.5rem;
+    }
+body {
+    .user__profile-main {
+        display: block;
+    }
+}
+    
 }
