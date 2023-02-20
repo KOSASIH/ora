@@ -2,13 +2,13 @@
 ## **Features**
 
 - Authentication with Pi Browser
-- Donate, tip, withdraw with Pi Account
+- Donate, Tip, Withdraw with Pi Account
 - CRUD Post, Comment, Search
 - Realtime Chat
 - Notifications
-- Follow authors, topics
+- Follow Authors, Topics
 - Profile
-- more...
+- More...
 
 ## Install
 
